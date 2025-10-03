@@ -25,11 +25,9 @@ the first line is optional. all existing scenarios should still be supported
 | TC05 | Custom Single-Character Delimiter | `"//;\n1;2"` | `3` | Validates custom delimiter usage |
 | TC06 | Custom Multi-Character Delimiter | `"//[***]\n1***2***3"` | `6` | Validates multi-character delimiter |
 | TC07 | Negative Number Throws Exception | `"1,-2"` | Exception: `negatives not allowed: -2` | Validates negative number handling |
-| TC08 | Multiple Negatives in Input | `"1,-2,-3"` | Exception: `negatives not allowed: -2,-3` | Validates multiple negatives reporting |
-| TC09 | Numbers Greater Than 1000 Are Ignored | `"2,1001"` | `2` | Validates exclusion of large numbers |
-| TC10 | Custom Delimiter with Newline Mixed | `"//;\n1;2\n3"` | `6` | Validates mixed delimiters with newline |
-| TC11 | Custom Delimiter with Special Characters | `"//[***]\n12***3"` | `15` | Validates parsing with special characters |
-| TC12 | Only Large Numbers Present | `"1001,1002"` | `0` | Validates all numbers ignored due to size |
+| TC08 | Numbers Greater Than 1000 Are Ignored | `"2,1001"` | `2` | Validates exclusion of large numbers |
+| TC09 | Custom Delimiter with Newline Mixed | `"//;\n1;2\n3"` | `6` | Validates mixed delimiters with newline |
+| TC10 | Custom Delimiter with Special Characters | `"//[***]\n12***3"` | `15` | Validates parsing with special characters |
 
 Establish quality parameters:
 
