@@ -28,6 +28,7 @@ the first line is optional. all existing scenarios should still be supported
 | TC08 | Numbers Greater Than 1000 Are Ignored | `"2,1001"` | `2` | Validates exclusion of large numbers |
 | TC09 | Custom Delimiter with Newline Mixed | `"//;\n1;2\n3"` | `6` | Validates mixed delimiters with newline |
 | TC10 | Custom Delimiter with Special Characters | `"//[***]\n12***3"` | `15` | Validates parsing with special characters |
+| TC11 | Invalid Newline Format | "1,\n" | Exception or invalid inputClarifies unsupported format|
 
 Establish quality parameters:
 
