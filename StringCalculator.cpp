@@ -1,6 +1,9 @@
 #include "StringCalculator.h"
+#include <string>
 
 int StringCalculator::Add(const std::string& numbers) 
 {
-    return 0; // minimal implementation to pass TC01
+    if (numbers.empty()) return 0;
+
+    return std::stoi(numbers); // handles single number input
 }
