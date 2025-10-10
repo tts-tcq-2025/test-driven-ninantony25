@@ -24,4 +24,4 @@ TEST(StringCalculatorTests, TC04_NewlineAsValidDelimiter) {
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
-}
+
