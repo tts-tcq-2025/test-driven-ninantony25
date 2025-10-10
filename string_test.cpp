@@ -1,21 +1,26 @@
 #include "StringCalculator.h"
-#include <cassert>
-#include <iostream>
+#include <gtest/gtest.h>
 
-int main() {
+TEST(StringCalculatorTests, TC01_EmptyStringReturnsZero) {
     StringCalculator calc;
-
-    // TC01: Empty string
-    assert(calc.Add("") == 0);
-    std::cout << "TC01 passed: Empty string returns 0\n";
-
-    // TC02: Single number
-    assert(calc.Add("1") == 1);
-    std::cout << "TC02 passed: Single number returns 1\n";
-
-    // TC03: Multiple comma-separated numbers
-    assert(calc.Add("1,2,3") == 6);
-    std::cout << "TC03 passed: Multiple numbers return correct sum\n";
-
-    return 0;
+    EXPECT_EQ(calc.Add(""), 0);
 }
+
+TEST(StringCalculatorTests, TC02_SingleNumberInput) {
+    StringCalculator calc;
+    EXPECT_EQ(calc.Add("1"), 1);
+}
+
+TEST(StringCalculatorTests, TC03_MultipleCommaSeparatedNumbers) {
+    StringCalculator calc;
+    EXPECT_EQ(calc.Add("1,2,3"), 6);
+}
+
+TEST(StringCalculatorTests, TC04_NewlineAsValidDelimiter) {
+    StringCalculator calc;
+    EXPECT_EQ(calc.Add("1\n2,3"), 6);
+}
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
