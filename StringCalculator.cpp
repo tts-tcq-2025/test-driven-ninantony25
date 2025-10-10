@@ -7,10 +7,26 @@
 int StringCalculator::Add(const std::string& numbers) {
     if (numbers.empty()) return 0;
 
-    std::string normalized = numbers;
-    std::replace(normalized.begin(), normalized.end(), '\n', ','); // treat newline as comma
+    std::string delimiter = ",";
+    std::string input = numbers;
 
-    std::stringstream ss(normalized);
+    // Check for custom delimiter
+    if (numbers.rfind("//", 0) == 0) {
+        size_t newlinePos = numbers.find('\n');
+        if (newlinePos != std::string::npos) {
+            delimiter = numbers.substr(2, newlinePos - 2);
+            input = numbers.substr(newlinePos + 1);
+        }
+    }
+
+    // Normalize delimiters
+    std::replace(input.begin(), input.end(), '\n', ',');
+    size_t pos = 0;
+    while ((pos = input.find(delimiter)) != std::string::npos) {
+        input.replace(pos, delimiter.length(), ",");
+    }
+
+    std::stringstream ss(input);
     std::string token;
     int sum = 0;
 
