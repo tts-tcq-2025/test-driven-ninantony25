@@ -21,7 +21,13 @@ TEST(StringCalculatorTests, TC04_NewlineAsValidDelimiter) {
     EXPECT_EQ(calc.Add("1\n2,3"), 6);
 }
 
+
+TEST(StringCalculatorTests, TC05_CustomSingleCharacterDelimiter) {
+    StringCalculator calc;
+    EXPECT_EQ(calc.Add("//;\n1;2"), 3);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
-
+}
