@@ -1,4 +1,5 @@
 #include "StringCalculator.h"
+
 #include <algorithm>
 #include <sstream>
 #include <string>
@@ -41,16 +42,33 @@ int SumTokens(const std::string& input) {
   std::stringstream ss(input);
   std::string token;
   int sum = 0;
+  std::vector<int> negatives;
+
   while (std::getline(ss, token, ',')) {
     if (!token.empty()) {
-      sum += std::stoi(token);
+      int num = std::stoi(token);
+      if (num < 0) {
+        negatives.push_back(num);
+      } else {
+        sum += num;
+      }
     }
   }
+
+  if (!negatives.empty()) {
+    std::ostringstream err;
+    err << "negatives not allowed:";
+    for (size_t i = 0; i < negatives.size(); ++i) {
+      err << " " << negatives[i];
+      if (i < negatives.size() - 1) err << ",";
+    }
+    throw std::runtime_error(err.str());
+  }
+
   return sum;
 }
 
 }  // namespace
-
 int StringCalculator::Add(const std::string& numbers) {
   if (numbers.empty()) return 0;
 
