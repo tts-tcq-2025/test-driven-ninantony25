@@ -43,6 +43,11 @@ TEST(StringCalculatorTests, TC07_NegativeNumberThrowsException) {
   }
 }
 
+TEST(StringCalculatorTests, TC08_NumbersGreaterThan1000AreIgnored) {
+  StringCalculator calc;
+  EXPECT_EQ(calc.Add("2,1001"), 2);
+}
+
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
