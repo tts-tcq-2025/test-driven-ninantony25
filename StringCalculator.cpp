@@ -49,7 +49,7 @@ int SumTokens(const std::string& input) {
       int num = std::stoi(token);
       if (num < 0) {
         negatives.push_back(num);
-      } else {
+      } else if (num <= 1000) {
         sum += num;
       }
     }
@@ -69,6 +69,7 @@ int SumTokens(const std::string& input) {
 }
 
 }  // namespace
+
 int StringCalculator::Add(const std::string& numbers) {
   if (numbers.empty()) return 0;
 
