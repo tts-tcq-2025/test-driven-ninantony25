@@ -48,6 +48,11 @@ TEST(StringCalculatorTests, TC08_NumbersGreaterThan1000AreIgnored) {
   EXPECT_EQ(calc.Add("2,1001"), 2);
 }
 
+TEST(StringCalculatorTests, TC09_CustomDelimiterWithNewlineMixed) {
+  StringCalculator calc;
+  EXPECT_EQ(calc.Add("//;\n1;2\n3"), 6);
+}
+
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
