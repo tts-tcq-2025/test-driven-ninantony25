@@ -31,6 +31,18 @@ TEST(StringCalculatorTests, TC06_CustomMultiCharacterDelimiter) {
   EXPECT_EQ(calc.Add("//[***]\n1***2***3"), 6);
 }
 
+TEST(StringCalculatorTests, TC07_NegativeNumberThrowsException) {
+  StringCalculator calc;
+  try {
+    calc.Add("1,-2");
+    FAIL() << "Expected std::runtime_error";
+  } catch (const std::runtime_error& err) {
+    EXPECT_STREQ(err.what(), "negatives not allowed: -2");
+  } catch (...) {
+    FAIL() << "Expected std::runtime_error";
+  }
+}
+
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
