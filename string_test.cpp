@@ -53,6 +53,23 @@ TEST(StringCalculatorTests, TC09_CustomDelimiterWithNewlineMixed) {
   EXPECT_EQ(calc.Add("//;\n1;2\n3"), 6);
 }
 
+TEST(StringCalculatorTests, TC10_CustomDelimiterWithSpecialCharacters) {
+  StringCalculator calc;
+  EXPECT_EQ(calc.Add("//[***]\n12***3"), 15);
+}
+
+TEST(StringCalculatorTests, TC11_InvalidNewlineFormatThrowsException) {
+  StringCalculator calc;
+  try {
+    calc.Add("1,\n");
+    FAIL() << "Expected std::runtime_error";
+  } catch (const std::runtime_error& err) {
+    EXPECT_STREQ(err.what(), "Invalid input format: empty token");
+  } catch (...) {
+    FAIL() << "Expected std::runtime_error";
+  }
+}
+
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
