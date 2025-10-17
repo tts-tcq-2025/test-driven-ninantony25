@@ -5,17 +5,22 @@
 #include <algorithm>
 
 namespace {
-    std::string extractDelimiter(std::string& input) {
-        if (input.rfind("//", 0) == 0) {
-            size_t newlinePos = input.find('\n');
-            if (newlinePos != std::string::npos) {
-                std::string delimiter = input.substr(2, newlinePos - 2);
-                input = input.substr(newlinePos + 1);
-                return delimiter;
-            }
-        }
-        return ",";
+std::string extractDelimiter(std::string& input) {
+    if (input.rfind("//", 0) != 0) return ",";
+
+    size_t newlinePos = input.find('\n');
+    if (newlinePos == std::string::npos) return ",";
+
+    std::string delimiterSpec = input.substr(2, newlinePos - 2);
+    input = input.substr(newlinePos + 1);
+
+    // Handle multi-character delimiter in [ ]
+    if (delimiterSpec.front() == '[' && delimiterSpec.back() == ']') {
+        return delimiterSpec.substr(1, delimiterSpec.size() - 2);
     }
+
+    return delimiterSpec; // single character delimiter
+}
 
     std::string normalizeDelimiters(const std::string& input, const std::string& delimiter) {
         std::string result = input;
