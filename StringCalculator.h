@@ -2,6 +2,7 @@
 #define STRINGCALCULATOR_H_
 
 #include <string>
+#include <stdexcept>
 
 class StringCalculator {
  public:
