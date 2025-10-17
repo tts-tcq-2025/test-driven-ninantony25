@@ -1,4 +1,5 @@
 #include "StringCalculator.h"
+
 #include <algorithm>
 #include <sstream>
 #include <string>
@@ -44,13 +45,15 @@ int SumTokens(const std::string& input) {
   std::vector<int> negatives;
 
   while (std::getline(ss, token, ',')) {
-    if (!token.empty()) {
-      int num = std::stoi(token);
-      if (num < 0) {
-        negatives.push_back(num);
-      } else if (num <= 1000) {
-        sum += num;
-      }
+    if (token.empty()) {
+      throw std::runtime_error("Invalid input format: empty token");
+    }
+
+    int num = std::stoi(token);
+    if (num < 0) {
+      negatives.push_back(num);
+    } else if (num <= 1000) {
+      sum += num;
     }
   }
 
