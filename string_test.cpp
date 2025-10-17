@@ -27,6 +27,11 @@ TEST(StringCalculatorTests, TC05_CustomSingleCharacterDelimiter) {
     EXPECT_EQ(calc.Add("//;\n1;2"), 3);
 }
 
+TEST(StringCalculatorTests, TC06_CustomMultiCharacterDelimiter) {
+    StringCalculator calc;
+    EXPECT_EQ(calc.Add("//[***]\n1***2***3"), 6);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
