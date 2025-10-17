@@ -1,5 +1,4 @@
 #include "StringCalculator.h"
-
 #include <algorithm>
 #include <sstream>
 #include <string>
@@ -7,21 +6,24 @@
 
 namespace {
 
+bool HasCustomDelimiter(const std::string& input) {
+  return input.rfind("//", 0) == 0 && input.find('\n') != std::string::npos;
+}
+
+std::string ParseDelimiterSpec(const std::string& spec) {
+  if (spec.size() >= 2 && spec.front() == '[' && spec.back() == ']') {
+    return spec.substr(1, spec.size() - 2);
+  }
+  return spec;
+}
+
 std::string ExtractDelimiter(std::string& input) {
-  if (input.rfind("//", 0) != 0) return ",";
+  if (!HasCustomDelimiter(input)) return ",";
 
   size_t newline_pos = input.find('\n');
-  if (newline_pos == std::string::npos) return ",";
-
   std::string delimiter_spec = input.substr(2, newline_pos - 2);
   input = input.substr(newline_pos + 1);
-
-  // Handle multi-character delimiter in [ ]
-  if (delimiter_spec.front() == '[' && delimiter_spec.back() == ']') {
-    return delimiter_spec.substr(1, delimiter_spec.size() - 2);
-  }
-
-  return delimiter_spec;
+  return ParseDelimiterSpec(delimiter_spec);
 }
 
 std::string NormalizeDelimiters(const std::string& input,
@@ -48,6 +50,7 @@ int SumTokens(const std::string& input) {
 }
 
 }  // namespace
+
 int StringCalculator::Add(const std::string& numbers) {
   if (numbers.empty()) return 0;
 
